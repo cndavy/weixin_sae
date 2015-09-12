@@ -1,23 +1,12 @@
 <?php
+/*
+    方倍工作室
+    CopyRight 2013 All Rights Reserved
+*/
+
 define("TOKEN", "weixin");
 
-/*$appid = "wx6a77b2b926acfea8";
-$appsecret = "66bd1d5be965776f55950983df485ff1";
-$url = "https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential&appid=$appid&secret=$appsecret";
-
-$ch = curl_init();
-curl_setopt($ch, CURLOPT_URL, $url);
-curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, FALSE); 
-curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, FALSE); 
-curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
-$output = curl_exec($ch);
-curl_close($ch);
-$jsoninfo = json_decode($output, true);
-$access_token = $jsoninfo["access_token"];*/
-
 $wechatObj = new wechatCallbackapiTest();
-//$wechatObj->valid();
-
 if (!isset($_GET['echostr'])) {
 	$wechatObj->responseMsg();
 }else{
@@ -30,7 +19,6 @@ class wechatCallbackapiTest
     {
         $echoStr = $_GET["echostr"];
         if($this->checkSignature()){
-            ob_clean();
             echo $echoStr;
             exit;
         }
@@ -118,20 +106,8 @@ class wechatCallbackapiTest
                 include("common.php");
                 $content = getNews1();
                 break;
-            //case "位置"
-            //    include("common.php");
-            //    $content = getGeo($object->Latitude, $object->Longitude);
-            //    break;
-            case "星座":
-                include("common.php");
-                $content = getAstrologyInfo($code);
-                break;
-            case "翻译":
-                include("common.php");
-                $content = getTranslateInfo($code);
-                break;
             default:
-                $content = "请输入：1）时间-获取当前时间；2）股票+股票代码-获取股票当前行情；3）分析+股票代码-获取股票分析；4）头条-获取网易头条新闻内容；5）翻译+内容-可以对内容进行中译英和英译中的翻译，有道翻译提供支持；6）星座+星座名称-例如星座双子，可以获取双子座的运势，新浪星座提供支持";
+                $content = "请输入：1）时间-获取当前时间；2）股票+股票代码-获取股票当前行情；3）分析+股票代码-获取股票分析；4）头条-获取网易头条新闻内容";
                 break;
         }
         if(is_array($content)){
