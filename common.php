@@ -38,7 +38,7 @@ function getNews()
             }           
 }
 
-function getNews1()
+function getNews1($applocation)
 {
     include('simple_html_dom.php');
  
@@ -60,7 +60,7 @@ function getNews1()
                 $resultArray[] = array(
                     "Title" =>$f1->plaintext,
                     "Description" =>"",
-                    "PicUrl" =>"",
+                    "PicUrl" =>$applocation . "/pic/news.png",
                     "Url" =>$f1->href);
             }
 
@@ -68,7 +68,7 @@ function getNews1()
 }
 
 function getGeo($Latitude, $Longitude){
-    $url = "http://api.map.baidu.com/geocoder/v2/?ak=B944e1fce373e33ea4627f95f54f2ef9&location=$Latitude,$Latitude&output=json&coordtype=gcj02ll";
+    $url = "http://api.map.baidu.com/geocoder/v2/?ak=B944e1fce373e33ea4627f95f54f2ef9&location=$Latitude,$Longitude&output=json&coordtype=gcj02ll";
     $output = file_get_contents($url);
     $address = json_decode($output, true);
     $contentStr = "位置 ".$address["result"]["addressComponent"]["province"]." ".$address["result"]["addressComponent"]["city"]." ".$address["result"]["addressComponent"]["district"]." ".$address["result"]["addressComponent"]["street"];

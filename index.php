@@ -1,5 +1,6 @@
 <?php
 define("TOKEN", "weixin");
+define("APPLOCATION", "http://18607110495.sinaapp.com");
 
 /*$appid = "wx6a77b2b926acfea8";
 $appsecret = "66bd1d5be965776f55950983df485ff1";
@@ -116,7 +117,7 @@ class wechatCallbackapiTest
             	break;
             case "头条":
                 include("common.php");
-                $content = getNews1();
+                $content = getNews1(APPLOCATION);
                 break;
             //case "位置"
             //    include("common.php");
