@@ -1,0 +1,103 @@
+$access_token = "";
+
+$data = '{"group": {"name": "老师"}}';
+$url = "https://api.weixin.qq.com/cgi-bin/groups/create?access_token=$access_token";
+$result = https_request($url, $data);
+$jsoninfo = json_decode($result, true);
+var_dump($result);
+
+function https_request($url, $data = null)
+{
+    $curl = curl_init();
+    curl_setopt($curl, CURLOPT_URL, $url);
+    curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, FALSE);
+    curl_setopt($curl, CURLOPT_SSL_VERIFYHOST, FALSE);
+    if (!empty($data)){
+        curl_setopt($curl, CURLOPT_POST, 1);
+        curl_setopt($curl, CURLOPT_POSTFIELDS, $data);
+    }
+    curl_setopt($curl, CURLOPT_RETURNTRANSFER, 1);
+    $output = curl_exec($curl);
+    curl_close($curl);
+    return $output;
+}
+
+$url = "https://api.weixin.qq.com/cgi-bin/groups/get?access_token=$access_token";
+$result = https_request($url);
+var_dump($result); 
+function https_request($url, $data = null)
+{
+    $curl = curl_init();
+    curl_setopt($curl, CURLOPT_URL, $url);
+    curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, FALSE);
+    curl_setopt($curl, CURLOPT_SSL_VERIFYHOST, FALSE);
+    if (!empty($data)){
+        curl_setopt($curl, CURLOPT_POST, 1);
+        curl_setopt($curl, CURLOPT_POSTFIELDS, $data);
+    }
+    curl_setopt($curl, CURLOPT_RETURNTRANSFER, 1);
+    $output = curl_exec($curl);
+    curl_close($curl);
+    return $output;
+}
+
+$data = '{"openid":"o7Lp5t6n59DeX3U0C7Kric9qEx-Q"}';
+$url = "https://api.weixin.qq.com/cgi-bin/groups/getid?access_token=$access_token";
+$result = https_request($url, $data); 
+var_dump($result); 
+function https_request($url, $data = null)
+{
+    $curl = curl_init();
+    curl_setopt($curl, CURLOPT_URL, $url);
+    curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, FALSE);
+    curl_setopt($curl, CURLOPT_SSL_VERIFYHOST, FALSE);
+    if (!empty($data)){
+        curl_setopt($curl, CURLOPT_POST, 1);
+        curl_setopt($curl, CURLOPT_POSTFIELDS, $data);
+    }
+    curl_setopt($curl, CURLOPT_RETURNTRANSFER, 1);
+    $output = curl_exec($curl);
+    curl_close($curl);
+    return $output;
+}
+
+$data = '{"group":{"id":100,"name":"学生"}}';
+$url = "https://api.weixin.qq.com/cgi-bin/groups/update?access_token=$access_token";
+$result = https_request($url, $data); 
+var_dump($result); 
+function https_request($url, $data = null)
+{
+    $curl = curl_init();
+    curl_setopt($curl, CURLOPT_URL, $url);
+    curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, FALSE);
+    curl_setopt($curl, CURLOPT_SSL_VERIFYHOST, FALSE);
+    if (!empty($data)){
+        curl_setopt($curl, CURLOPT_POST, 1);
+        curl_setopt($curl, CURLOPT_POSTFIELDS, $data);
+    }
+    curl_setopt($curl, CURLOPT_RETURNTRANSFER, 1);
+    $output = curl_exec($curl);
+    curl_close($curl);
+    return $output;
+}
+
+
+$data = '{"openid":"o7Lp5t6n59DeX3U0C7Kric9qEx-Q","to_groupid":100}';
+$url = "https://api.weixin.qq.com/cgi-bin/groups/members/update?access_token=$access_token";
+$result = https_request($url, $data); 
+var_dump($result); 
+function https_request($url, $data = null)
+{
+    $curl = curl_init();
+    curl_setopt($curl, CURLOPT_URL, $url);
+    curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, FALSE);
+    curl_setopt($curl, CURLOPT_SSL_VERIFYHOST, FALSE);
+    if (!empty($data)){
+        curl_setopt($curl, CURLOPT_POST, 1);
+        curl_setopt($curl, CURLOPT_POSTFIELDS, $data);
+    }
+    curl_setopt($curl, CURLOPT_RETURNTRANSFER, 1);
+    $output = curl_exec($curl);
+    curl_close($curl);
+    return $output;
+}

@@ -1,0 +1,7 @@
+本节是 新出来的 高级群发接口的源代码部分，本书编写时，该接口还未出现，所以书中没有该章节
+博客上的教程在 http://www.cnblogs.com/txw1958/p/weixin89-mass-send.html
+
+
+
+
+

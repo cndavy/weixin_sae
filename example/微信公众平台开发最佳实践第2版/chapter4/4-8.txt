@@ -1,0 +1,42 @@
+$access_token = "5ic8RoqZd7IBUtE0aGXUhcdKBnrwlO1iqtvyJJUgIcDcopJIH7x90QH4yiK_z08fqp4WOD7kfKPDtET29BRYNZO-sSIITaxIj4u72LYAYcFH6t1fiSVzjUuqYWOtHiw0LGDorxx5Qj6SN0Z7GtYGTA";
+
+$openid="o7Lp5t6n59DeX3U0C7Kric9qEx-Q";
+$url = "https://api.weixin.qq.com/cgi-bin/user/info?access_token=$access_token&openid=$openid&lang=zh_CN";
+$output = https_request($url);
+var_dump($output);
+
+function https_request($url)
+{
+    $curl = curl_init();
+    curl_setopt($curl, CURLOPT_URL, $url);
+    curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, FALSE);
+    curl_setopt($curl, CURLOPT_SSL_VERIFYHOST, FALSE);
+    curl_setopt($curl, CURLOPT_RETURNTRANSFER, 1);
+    $data = curl_exec($curl);
+    if (curl_errno($curl)) {return 'ERROR '.curl_error($curl);}
+    curl_close($curl);
+    return $data;
+}
+
+
+private function receiveEvent($object)
+{
+    $contentStr = "";
+    switch ($object->Event)
+    {
+        case "subscribe":
+            $access_token = "nFX6GFsspSLBKJLgMQ3kj1YM8_FchRE7vE2ZOIlmfiAB0WZh8c5xcCRiXGLL3h3uUamBOb7Tr7cix_A-UQwig9_-mohVK338yJG6wnv_cvVCZj6PQBjTuT_yKbiuIceKYqFhCjMFU21Z_b7d6Go88w";
+            $openid = $object->FromUserName;
+            $url = "https://api.weixin.qq.com/cgi-bin/user/info?access_token=$access_token&openid=$openid&lang=zh_CN";
+            $output = $this->https_request($url);
+            $jsoninfo = json_decode($output, true);
+            $contentStr = "您好，".$jsoninfo["nickname"]."\n".
+            "性别：".(($jsoninfo["sex"] == 1)?"男":(($jsoninfo["sex"] == 2)?"女":"未知"))."\n".
+            "地区：".$jsoninfo["country"]." ".$jsoninfo["province"]." ".$jsoninfo["city"]."\n".
+            "语言：".(($jsoninfo["language"] == "zh_CN")?"简体中文":"非简体中文")."\n".
+            "关注：".date('Y年m月d日',$jsoninfo["subscribe_time"]);
+            break;   
+    }
+    $resultStr = $this->transmitText($object, $contentStr);
+    return $resultStr;
+}

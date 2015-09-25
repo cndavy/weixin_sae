@@ -1,0 +1,42 @@
+<result>
+  <count>1</count>
+  <url>
+    <encode>
+      <![CDATA[
+      http://zhangmenshiting.baidu.com/data2/music/34134626/ZGZkZ2lsaW5fn6NndK6ap5WXcJeZnG-dZWOZZZqcanFjZJlnl5eYnZaYl2eZaGpvZmhoaW1qmplilpZsm5mdb2SXbFqin5t1YWBjZ2tvam1lamdobWdpajE$
+      ]]>
+    </encode>
+    <decode>
+      <![CDATA[
+      34134626.mp3?xcode=cdf8e41f1ef3922f3baaeefd3d237565584ca1dc8fcf73e9&mid=0.03693548448122
+      ]]>
+    </decode>
+    <type>8</type>
+    <lrcid>744980</lrcid>
+    <flag>1</flag>
+  </url>
+  <durl>
+    <encode>
+      <![CDATA[
+      http://zhangmenshiting2.baidu.com/data2/music/34134610/ZGZkZ2lsaGhfn6NndK6ap5WXcJeZnG-dZWOZZZqcanFjZJlnl5eYnZaYl2eZaGpvZmhoaJhmnZxoZmlnZpdoaWhllFqin5t1YWBjZ2tvam1lamdobWdpajE$
+      ]]>
+    </encode>
+    <decode>
+      <![CDATA[
+      34134610.mp3?xcode=cdf8e41f1ef3922f3baaeefd3d2375654c0fd74631a1173a&mid=0.03693548448122
+      ]]>
+    </decode>
+    <type>8</type>
+    <lrcid>744980</lrcid>
+    <flag>1</flag>
+  </durl>
+  <p2p>
+    <hash>9e416694e8f16ef2fd397e0a230b0e685031439e</hash>
+    <url>
+      <![CDATA[ ]]>
+    </url>
+    <type>mp3</type>
+    <size>6889567</size>
+    <bitrate>192</bitrate>
+  </p2p>
+</result>

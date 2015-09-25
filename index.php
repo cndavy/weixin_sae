@@ -104,31 +104,31 @@ class wechatCallbackapiTest
         switch ($category)
         {
             case "股票":
-                include("stock.php");
+                include("./function/stock.php");
                 $content = getStockInfo($code);
                 break;
             case "分析":
-                include("analysis.php");
+                include("./function/analysis.php");
                 $content = getStockAnalysis($code);
                 break;
             case "时间":
-            	include("common.php");
+            	include("./function/common.php");
             	$content = getDateTime();
             	break;
             case "头条":
-                include("common.php");
+                include("./function/common.php");
                 $content = getNews1(APPLOCATION);
                 break;
             //case "位置"
-            //    include("common.php");
-            //    $content = getGeo($object->Latitude, $object->Longitude);
+            //   include("common.php");
+            //    $content = getGeo($object->Location_X, $object->Location_Y);
             //    break;
             case "星座":
-                include("common.php");
+                include("./function/common.php");
                 $content = getAstrologyInfo($code);
                 break;
             case "翻译":
-                include("common.php");
+                include("./function/common.php");
                 $content = getTranslateInfo($code);
                 break;
             default:

@@ -1,0 +1,193 @@
+//上传图片
+$type = "image";
+$filepath = dirname(__FILE__)."\winter.jpg";
+$filedata = array("media"  => "@".$filepath);
+$url = "http://file.api.weixin.qq.com/cgi-bin/media/upload?access_token=$access_token&type=$type";
+$result = https_request($url, $filedata); 
+var_dump($result); 
+function https_request($url, $data = null)
+{
+    $curl = curl_init();
+    curl_setopt($curl, CURLOPT_URL, $url);
+    curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, FALSE);
+    curl_setopt($curl, CURLOPT_SSL_VERIFYHOST, FALSE);
+    if (!empty($data)){
+        curl_setopt($curl, CURLOPT_POST, 1);
+        curl_setopt($curl, CURLOPT_POSTFIELDS, $data);
+    }
+    curl_setopt($curl, CURLOPT_RETURNTRANSFER, 1);
+    $output = curl_exec($curl);
+    curl_close($curl);
+    return $output;
+}
+
+//上传语音
+$type = "voice";
+$filepath = dirname(__FILE__)."\invite.mp3";
+$filedata = array("media"  => "@".$filepath);
+$url = "http://file.api.weixin.qq.com/cgi-bin/media/upload?access_token=$access_token&type=$type";
+$result = https_request($url, $filedata); 
+var_dump($result); 
+function https_request($url, $data = null)
+{
+    $curl = curl_init();
+    curl_setopt($curl, CURLOPT_URL, $url);
+    curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, FALSE);
+    curl_setopt($curl, CURLOPT_SSL_VERIFYHOST, FALSE);
+    if (!empty($data)){
+        curl_setopt($curl, CURLOPT_POST, 1);
+        curl_setopt($curl, CURLOPT_POSTFIELDS, $data);
+    }
+    curl_setopt($curl, CURLOPT_RETURNTRANSFER, 1);
+    $output = curl_exec($curl);
+    curl_close($curl);
+    return $output;
+}
+
+//上传视频
+$type = "video";
+$filepath = dirname(__FILE__)."\bbb.mp4";
+$filedata = array("media"  => "@".$filepath);
+$url = "http://file.api.weixin.qq.com/cgi-bin/media/upload?access_token=$access_token&type=$type";
+$result = https_request($url, $filedata);
+var_dump($result); 
+function https_request($url, $data = null)
+{
+    $curl = curl_init();
+    curl_setopt($curl, CURLOPT_URL, $url);
+    curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, FALSE);
+    curl_setopt($curl, CURLOPT_SSL_VERIFYHOST, FALSE);
+    if (!empty($data)){
+        curl_setopt($curl, CURLOPT_POST, 1);
+        curl_setopt($curl, CURLOPT_POSTFIELDS, $data);
+    }
+    curl_setopt($curl, CURLOPT_RETURNTRANSFER, 1);
+    $output = curl_exec($curl);
+    curl_close($curl);
+    return $output;
+}
+
+//上传缩略图
+$type = "thumb";
+$filepath = dirname(__FILE__)."\qrcode.jpg";
+$filedata = array("media"  => "@".$filepath);
+$url = "http://file.api.weixin.qq.com/cgi-bin/media/upload?access_token=$access_token&type=$type";
+$result = https_request($url, $filedata);
+var_dump($result); 
+function https_request($url, $data = null)
+{
+    $curl = curl_init();
+    curl_setopt($curl, CURLOPT_URL, $url);
+    curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, FALSE);
+    curl_setopt($curl, CURLOPT_SSL_VERIFYHOST, FALSE);
+    if (!empty($data)){
+        curl_setopt($curl, CURLOPT_POST, 1);
+        curl_setopt($curl, CURLOPT_POSTFIELDS, $data);
+    }
+    curl_setopt($curl, CURLOPT_RETURNTRANSFER, 1);
+    $output = curl_exec($curl);
+    curl_close($curl);
+    return $output;
+}
+
+$access_token = "";
+
+//下载图片
+$mediaid = "QQ9nj-7ctrqA8t3WKU3dQN24IuFV_516MfZRZNnQ0c-BFVkk66jUkPXF49QE9L1l";
+$url = "http://file.api.weixin.qq.com/cgi-bin/media/get?access_token=$access_token&media_id=$mediaid";
+$fileInfo = downloadWeixinFile($url);
+$filename = "down_image.jpg";
+saveWeixinFile($filename, $fileInfo["body"]);
+
+function downloadWeixinFile($url)
+{
+    $ch = curl_init($url);
+    curl_setopt($ch, CURLOPT_HEADER, 0);    
+    curl_setopt($ch, CURLOPT_NOBODY, 0);    //只取body头
+    curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, FALSE);
+    curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, FALSE);
+    curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+    $package = curl_exec($ch);
+    $httpinfo = curl_getinfo($ch);
+    curl_close($ch);
+    $imageAll = array_merge(array('header' => $httpinfo), array('body' => $package)); 
+    return $imageAll;
+}
+
+function saveWeixinFile($filename, $filecontent)
+{
+    $local_file = fopen($filename, 'w');
+    if (false !== $local_file){
+        if (false !== fwrite($local_file, $filecontent)) {
+            fclose($local_file);
+        }
+    }
+}
+
+
+//下载语音
+$mediaid = "5Idx79V9E3XfBCz_A50gr1a1_klgPpJnb_eq73yz0bn-prhIsNlwI3n6jQgshmWk";
+$url = "http://file.api.weixin.qq.com/cgi-bin/media/get?access_token=$access_token&media_id=$mediaid";
+$fileInfo = downloadWeixinFile($url);
+
+$filename = "down_voice.mp3";
+saveWeixinFile($filename, $fileInfo["body"]); 
+
+function downloadWeixinFile($url)
+{
+    $ch = curl_init($url);
+    curl_setopt($ch, CURLOPT_HEADER, 0);    
+    curl_setopt($ch, CURLOPT_NOBODY, 0);    //只取body头
+    curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, FALSE);
+    curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, FALSE);
+    curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+    $package = curl_exec($ch);
+    $httpinfo = curl_getinfo($ch);
+    curl_close($ch);
+    $imageAll = array_merge(array('header' => $httpinfo), array('body' => $package)); 
+    return $imageAll;
+}
+
+function saveWeixinFile($filename, $filecontent)
+{
+    $local_file = fopen($filename, 'w');
+    if (false !== $local_file){
+        if (false !== fwrite($local_file, $filecontent)) {
+            fclose($local_file);
+        }
+    }
+}
+
+
+//下载缩略图
+$mediaid = "2RhP0caRKHVOmZO5AKelHkK--vqPPwgUaRp5-WE63dvmmPRWiYVKgvNblIp_gv79";
+$url = "http://file.api.weixin.qq.com/cgi-bin/media/get?access_token=$access_token&media_id=$mediaid";
+$fileInfo = downloadWeixinFile($url);
+
+$filename = "down_thumb.jpg";
+saveWeixinFile($filename, $fileInfo["body"]); 
+
+function downloadWeixinFile($url)
+{
+    $ch = curl_init($url);
+    curl_setopt($ch, CURLOPT_HEADER, 0);    
+    curl_setopt($ch, CURLOPT_NOBODY, 0);    //只取body头
+    curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, FALSE);
+    curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, FALSE);
+    curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+    $package = curl_exec($ch);
+    $httpinfo = curl_getinfo($ch);
+    curl_close($ch);
+    $imageAll = array_merge(array('header' => $httpinfo), array('body' => $package)); 
+    return $imageAll;
+}
+
+function saveWeixinFile($filename, $filecontent)
+{
+    $local_file = fopen($filename, 'w');
+    if (false !== $local_file){
+        if (false !== fwrite($local_file, $filecontent)) {
+            fclose($local_file);
+        }
+    }
+}

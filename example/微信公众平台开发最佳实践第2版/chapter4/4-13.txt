@@ -1,0 +1,74 @@
+根据模版消息ID和详细内容中的参数，我们构造模版消息包的JSON格式如下。
+{
+    "touser": "owddJuAiiQpXZedAWxjpp3pkZTzU",
+    "template_id": "jD1Jfu0ElKcyEK0CfJ2JjTy4U1fjYI09l6eax9BBu9U",
+    "url": "http://www.cnblogs.com/txw1958/",
+    "topcolor": "#7B68EE",
+    "data": {
+        "first": {
+            "value": "您好，方倍，欢迎使用模版消息！",
+            "color": "#743A3A"
+        },
+        "product": {
+            "value": "微信公众平台开发最佳实践",
+            "color": "#FF0000"
+        },
+        "price": {
+            "value": "69.00元",
+            "color": "#C4C400"
+        },
+        "time": {
+            "value": "2014年6月1日",
+            "color": "#0000FF"
+        },
+        "remark": {
+            "value": "\n你的订单已提交，我们将尽快发货。祝您生活愉快！",
+            "color": "#008000"
+        }
+    }
+}
+发送模版消息的实现代码如下：
+<?php
+
+$template = array('touser' => "owddJuAiiQpXZedAWxjpp3pkZTzU",
+                 'template_id' => "jD1Jfu0ElKcyEK0CfJ2JjTy4U1fjYI09l6eax9BBu9U",
+                 'url' => "http://www.cnblogs.com/txw1958/",
+                 'topcolor' => "#7B68EE",
+                 'data' => array('first'    => array('value' => urlencode("您好，方倍，欢迎使用模版消息！"),
+                                                    'color' => "#743A3A",
+                                                     ),
+                                 'product' => array('value' => urlencode("微信公众平台开发最佳实践"),
+                                                    'color' => "#FF0000",
+                                                     ),
+                                 'price'     => array('value' => urlencode("69.00元"),
+                                                    'color' => "#C4C400",
+                                                     ),
+                                 'time'     => array('value' => urlencode("2014年6月1日"),
+                                                    'color' => "#0000FF",
+                                                     ),
+                                 'remark'     => array('value' => urlencode("\\n你的订单已提交，我们将尽快发货。祝您生活愉快！"),
+                                                    'color' => "#008000",
+                                                     ),
+
+                                 )
+                 );
+
+$url = "https://api.weixin.qq.com/cgi-bin/message/template/send?access_token=".$access_token;
+$result = https_request($url, urldecode(json_encode($template)));
+var_dump($result);
+    
+function https_request($url,$data = null){
+    $curl = curl_init();
+    curl_setopt($curl, CURLOPT_URL, $url);
+    curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, FALSE);
+    curl_setopt($curl, CURLOPT_SSL_VERIFYHOST, FALSE);
+    if (!empty($data)){
+        curl_setopt($curl, CURLOPT_POST, 1);
+        curl_setopt($curl, CURLOPT_POSTFIELDS, $data);
+    }
+    curl_setopt($curl, CURLOPT_RETURNTRANSFER, 1);
+    $output = curl_exec($curl);
+    curl_close($curl);
+    return $output;
+}
+?>
