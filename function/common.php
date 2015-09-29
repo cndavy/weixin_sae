@@ -150,4 +150,37 @@ function getTranslateInfo($keyword)
     return trim($result);
 }
 
+//附近加油站
+function catchEntitiesFromLocation($x, $y)
+{
+    $url = "http://api.map.baidu.com/place/v2/search?ak=MgBALVVeCd8THVBi6gPdvsvG&output=json&query=加油站&page_size=5&page_num=0&scope=2&location=".$x.",".$y."&radius=5000&filter=sort_name:distance";
+    
+    $ch = curl_init();
+    curl_setopt($ch, CURLOPT_URL, $url);
+    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+    $output = curl_exec($ch);
+    
+    $data = json_decode($output, true);
+
+    if ($data['status'] != 0){
+        return $data['message'];
+    }
+    
+    $results = $data['results'];
+    if (count($results) == 0){
+        return "附近没有找到加油站";
+    }
+    $shopArray = array();
+    $shopArray[] = array("Title"=>"附近的加油站", "Description"=>"", "PicUrl"=>"", "Url"=>"");
+    for ($i = 0; $i < count($results); $i++) {
+        $shopArray[] = array(
+            "Title"=>"【".$results[$i]['name']."】<".$results[$i]['detail_info']['distance']."米>\n".$results[$i]['address'].
+            (isset($results[$i]['telephone'])?"\n".$results[$i]['telephone']:""),
+            "Description"=>"", 
+            "PicUrl"=>"", 
+            "Url"=>(isset($results[$i]['detail_info']['detail_url'])?($results[$i]['detail_info']['detail_url']):""));
+    }
+    return $shopArray;
+}
+
 ?>

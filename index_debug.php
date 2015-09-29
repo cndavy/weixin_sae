@@ -2,20 +2,9 @@
 define("TOKEN", "weixin");
 define("APPLOCATION", "http://18607110495.sinaapp.com");
 
-//---创建自定义菜单代码开始---
-$appid = "wx551811ed349b6325";
-$appsecret = "96e4c8eedfff806456b942e170dd43b7";
-$url = "https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential&appid=$appid&secret=$appsecret";
-
-$ch = curl_init();
-curl_setopt($ch, CURLOPT_URL, $url);
-curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, FALSE); 
-curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, FALSE); 
-curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
-$output = curl_exec($ch);
-curl_close($ch);
-$jsoninfo = json_decode($output, true);
-$access_token = $jsoninfo["access_token"];
+//引入微信高级接口类
+include("./function/weixin.class.php");
+$wxclass = new class_weixin_adv("wx551811ed349b6325","96e4c8eedfff806456b942e170dd43b7");
 
 $jsonmenu = '{
       "button":[
@@ -54,29 +43,23 @@ $jsonmenu = '{
                "type":"click",
                "name":"网易头条",
                "key":"网易头条"
+            },
+            {
+                "type":"view",
+                "name":"掌上百度",
+                "url":"http://m.baidu.com"
+            },
+            {
+                "type":"location_select",
+                "name":"附近加油",
+                "key":"附近加油"
             }]
        }]
  }';
 
-$url = "https://api.weixin.qq.com/cgi-bin/menu/create?access_token=".$access_token;
-$result = https_request($url, $jsonmenu);
-var_dump($result);
+//创建自定义菜单代码结束
+var_dump($wxclass->create_menu($jsonmenu));
 
-function https_request($url,$data = null){
-    $curl = curl_init();
-    curl_setopt($curl, CURLOPT_URL, $url);
-    curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, FALSE);
-    curl_setopt($curl, CURLOPT_SSL_VERIFYHOST, FALSE);
-    if (!empty($data)){
-        curl_setopt($curl, CURLOPT_POST, 1);
-        curl_setopt($curl, CURLOPT_POSTFIELDS, $data);
-    }
-    curl_setopt($curl, CURLOPT_RETURNTRANSFER, 1);
-    $output = curl_exec($curl);
-    curl_close($curl);
-    return $output;
-}
-//---创建自定义菜单代码结束---
 
 $wechatObj = new wechatCallbackapiTest();
 //$wechatObj->valid();
@@ -165,6 +148,10 @@ class wechatCallbackapiTest
                         $content = "你点击了 " . $object->EventKey . "。";
                         break;
                 }
+                break;
+            case "LOCATION":
+                include("./function/common.php");
+                $content = catchEntitiesFromLocation($object->Latitude,$object->Longitude);
                 break;
             //---响应自定义菜单代码结束---
         }
