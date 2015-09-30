@@ -50,9 +50,9 @@ $jsonmenu = '{
                 "url":"http://m.baidu.com"
             },
             {
-                "type":"location_select",
-                "name":"附近加油",
-                "key":"附近加油"
+                "type":"view",
+                "name":"测试网页",
+                "url":"http://18607110495.sinaapp.com/mobile/jquery.html"
             }]
        }]
  }';
@@ -149,10 +149,10 @@ class wechatCallbackapiTest
                         break;
                 }
                 break;
-            case "LOCATION":
+            /*case "LOCATION":
                 include("./function/common.php");
                 $content = catchEntitiesFromLocation($object->Latitude,$object->Longitude);
-                break;
+                break;*/
             //---响应自定义菜单代码结束---
         }
         if(is_array($content)){
