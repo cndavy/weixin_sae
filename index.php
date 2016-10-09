@@ -2,14 +2,14 @@
 define("TOKEN", "weixin");
 define("APPLOCATION", "http://18607110495.sinaapp.com");
 
-/*$appid = "wx6a77b2b926acfea8";
-$appsecret = "66bd1d5be965776f55950983df485ff1";
+/*$appid = "wx49bc3ae7f78b4579";
+$appsecret = "74ba0202277a71f8237b3244cdd527db";
 $url = "https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential&appid=$appid&secret=$appsecret";
 
 $ch = curl_init();
 curl_setopt($ch, CURLOPT_URL, $url);
-curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, FALSE); 
-curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, FALSE); 
+curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, FALSE);
+curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, FALSE);
 curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
 $output = curl_exec($ch);
 curl_close($ch);

@@ -4,7 +4,7 @@ define("APPLOCATION", "http://18607110495.sinaapp.com");
 
 //引入微信高级接口类
 include("./function/weixin.class.php");
-$wxclass = new class_weixin_adv("wx551811ed349b6325","96e4c8eedfff806456b942e170dd43b7");
+$wxclass = new class_weixin_adv("wx6c310773cacdd212","c7b33cc9dbf6e4cf6358c8f278ba07a9");
 
 $jsonmenu = '{
       "button":[
