@@ -11,8 +11,11 @@
     $weixin = new class_weixin();
 */
 
-define('APPID',         "wxed782be999f86eab");
-define('APPSECRET',        "72edec63779f7aa16a3a33447e2c7-fb");
+define("TOKEN", "weixin");
+define("APPID", "wx6c310773cacdd212");
+define("APPSECRET", "c7b33cc9dbf6e4cf6358c8f278ba07a9");
+$appid = APPID;
+$appsecret = APPSECRET;
 
 class class_weixin
 {
